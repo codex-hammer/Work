@@ -1,0 +1,56 @@
+<?php
+$user='root';
+$pass='';
+$db='project';
+$db=new mysqli('localhost',$user,$pass,$db) or die ("unable to connect");
+session_start();
+$t=$_POST["show_status"];
+$s=$_SESSION['email_id'];
+$sql="SELECT employee_email,employee_name,bid_amount FROM bid where proj_id=$t AND employer_email=$s ORDER BY bid DESC";
+if ($db->query($sql)===TRUE)
+{
+$result = mysqli_query($db,$sql);
+
+echo "<table border=0 style='width:100%'><tr><th>employee_email</th><th>employee_name</th><th>bid_amount</th></tr>"; // start a table tag in the HTML
+
+while($row = mysqli_fetch_array($result))
+{
+echo "<tr><td>" . $row['employee_email'] . "</td><td>" . $row['employee_name'] . "</td><td>" . $row['bid_amount'] . "</td></tr>";
+}
+
+
+
+}
+else
+{echo "Error connecting to DATABASE".$db->error;}
+$db->close();
+?>
+-------------------------------------------------------------------------------------
+<?php
+$user='root';
+$pass='';
+$db='project';
+$db=new mysqli('localhost',$user,$pass,$db) or die ("unable to connect");
+session_start();
+$t=$_POST["show_status"];
+$s=$_SESSION['email_id'];
+$sql="SELECT employee_email,employee_name,submit_time FROM bid where proj_id=$t AND employer_email=$s ORDER BY submit_time asc";
+if ($db->query($sql)===TRUE)
+{
+$result = mysqli_query($db,$sql);
+
+echo "<table border=0 style='width:100%'><tr><th>employee_email</th><th>employee_name</th><th>submit_time</th></tr>"; // start a table tag in the HTML
+
+while($row = mysqli_fetch_array($result))
+{
+echo "<tr><td>" . $row['employee_email'] . "</td><td>" . $row['employee_name'] . "</td><td>" . $row['submit_time'] . "</td></tr>";
+}
+
+
+
+}
+else
+{echo "Error connecting to DATABASE".$db->error;}
+$db->close();
+?>
+-------------------------------------------
